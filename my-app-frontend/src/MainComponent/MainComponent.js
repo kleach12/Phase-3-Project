@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import './MainComponent.css'
+import JobForm from './JobForm';
 import Button from '@mui/material/Button';
 import { DataGrid, GridRowsProp, GridColDef } from '@mui/x-data-grid';
 
@@ -12,18 +13,22 @@ function MainComponent(){
     { id: 3, col1: 'MUI', col2: 'is Amazing' },
   ];
   
-  const columns: GridColDef[] = [
-    { field: 'col1', headerName: 'Company Name', width: 150 , editable: true },
+  const columns: GridColDef = [
+    { field: 'col1', headerName: 'Position', width: 150 , editable: true },
     { field: 'col2', headerName: 'Company Name', width: 150, editable: true  },
-    { field: 'col3', headerName: 'Column 2', width: 150, editable: true  },
+    { field: 'col3', headerName: 'Status', width: 150, editable: true, type: 'singleSelect' , valueOptions: ['Apply','Applied','Contacted', 'Interview', 'Rejected', 'Accepted']},
+    { field: 'col4', headerName: 'Applied Date', width: 150, editable: true, type: 'dateTime' },
+    { field: 'col5', headerName: 'Response Date', width: 150, editable: true, type: 'dateTime' },
+    { field: 'col6', headerName: 'Notes', width: 200, editable: true, type: 'string' }
     
   ];
 
   return(
-    <div class = "grid">
-      <div style={{ height: 300, width: '95%',}}>
-      <Button sx={{ mb: 2 }} onClick={() => setCheckboxSelection(!checkboxSelection)}/>
-        <DataGrid sx={{ m: 1, border:5, borderColor: 'grey.500',borderRadius: '16px', left: '2%',  }} class = 'grid' rows={rows} columns={columns} checkboxSelection={checkboxSelection} experimentalFeatures={{ newEditingApi: true }}/>
+    <div className = "grid">
+      <JobForm />
+      <div style={{ height: 300, width: '80%',}}>
+        <Button sx={{ mb: 5 }} onClick={() => setCheckboxSelection(!checkboxSelection)}/>
+        <DataGrid sx={{ m: 1, border:5, borderColor: 'grey.500',borderRadius: '16px', left: '12%',  }} class = 'grid' rows={rows} columns={columns} checkboxSelection={checkboxSelection} experimentalFeatures={{ newEditingApi: true }}/>
       </div>
     </div>
   );
