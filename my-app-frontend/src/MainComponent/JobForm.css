@@ -1,4 +1,23 @@
+.form{
+  text-align: left;
+}
+.active_form{
+  font-family: 'Arvo', serif;
+}
+
+
+span {
+  font-family: 'Arvo', serif;
+  font-size: 25px;
+  color: #3C91E6;
+  margin-left: 10px;
+}
 .add {
-  font-size: 50px;
-  color:red;
+  margin-left: 10%;
+  font-size: 30px;
+  color: #FFA400;
+}
+
+.add:hover{
+  color: #fad592;
 }

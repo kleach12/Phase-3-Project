@@ -26,9 +26,9 @@ function MainComponent(){
   return(
     <div className = "grid">
       <JobForm />
-      <div style={{ height: 300, width: '80%',}}>
+      <div style={{ height: 300, width: '80%', margin : 0}}>
         <Button sx={{ mb: 5 }} onClick={() => setCheckboxSelection(!checkboxSelection)}/>
-        <DataGrid sx={{ m: 1, border:5, borderColor: 'grey.500',borderRadius: '16px', left: '12%',  }} class = 'grid' rows={rows} columns={columns} checkboxSelection={checkboxSelection} experimentalFeatures={{ newEditingApi: true }}/>
+        <DataGrid sx={{ m: 1, border:5, borderColor: 'grey.500',borderRadius: '16px', left: '12%', bottom: '10%'  }} class = 'grid' rows={rows} columns={columns} checkboxSelection={checkboxSelection} experimentalFeatures={{ newEditingApi: true }}/>
       </div>
     </div>
   );
