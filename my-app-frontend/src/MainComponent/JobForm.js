@@ -28,6 +28,7 @@ function JobForm(){
       </select>
       <label> Date </label>
       <input type='date' id = 'position'/>
+      <input id = 'submit' type ='submit' />
       
     </div>
   )

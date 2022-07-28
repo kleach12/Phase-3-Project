@@ -5,9 +5,13 @@ import { faAddressCard } from '@fortawesome/free-solid-svg-icons'
 function Header(){
 
   return(
-    <div className= "header">
-      <h1> JobHunt <FontAwesomeIcon icon={faAddressCard} /></h1>
-    </div>
+    <nav className= "header">
+      <ul>
+        <li><h1> JobHunt <FontAwesomeIcon icon={faAddressCard} /></h1></li>
+        <li><button> Login</button></li>
+        <li><button> Register</button></li>
+      </ul>
+    </nav>
   )
 }
 

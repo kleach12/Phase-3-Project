@@ -3,12 +3,25 @@
 }
 .active_form{
   font-family: 'Arvo', serif;
+  font-weight: 600;
+  font-size: 20px;
+  text-align: center;
+  background-color: #edede9;
+  color:  #3C91E6;
+  padding: 10px 10px;
+  margin: 1% 15%;
+  border-radius: 16px;
+  border:solid 3px;
+  border-color: #cacac7;
 }
-
+label{
+  padding: 20px 20px;
+}
 
 span {
   font-family: 'Arvo', serif;
   font-size: 25px;
+  font-weight: 600;
   color: #3C91E6;
   margin-left: 10px;
 }
@@ -20,4 +33,31 @@ span {
 
 .add:hover{
   color: #fad592;
+}
+
+#submit{
+  font-family: 'Arvo', serif;
+  font-weight: 600;
+  font-size: 15px;
+  background-color: #FFA400;
+  color: #3C91E6;
+  border: none;
+  border-radius: 16px;
+  padding: 10px 20px;
+  margin: 10px 20px;
+}
+
+input{
+  padding: 5px;
+  font-family: 'Arvo', serif;
+  font-size: 15px;
+  border-radius: 5px;
+  border: solid #3C91E6;
+}
+select{
+  padding: 5px;
+  font-family: 'Arvo', serif;
+  font-size: 15px;
+  border-radius: 5px;
+  border: solid #3C91E6;
 }
