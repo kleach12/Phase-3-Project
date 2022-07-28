@@ -57,7 +57,7 @@ input{
   font-family: 'Arvo', serif;
   font-size: 15px;
   border-radius: 5px;
-  border: solid #3C91E6;
+  border: solid #cacac7;
 }
 
 select{
@@ -65,5 +65,5 @@ select{
   font-family: 'Arvo', serif;
   font-size: 15px;
   border-radius: 5px;
-  border: solid #3C91E6;
+  border: solid #cacac7;
 }

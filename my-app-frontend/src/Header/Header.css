@@ -6,6 +6,7 @@
   margin: 0;
   padding: 0;
   font-family: 'Arvo', serif;
+  overflow: hidden;
 }
 li{
   display: inline;
@@ -24,6 +25,10 @@ ul{
   margin: 10px;
 }
 
+.nav-items{
+  display: flex;
+}
+
 button{
   font-family: 'Arvo', serif;
   font-weight: 300;
@@ -38,4 +43,19 @@ button{
 
 button:hover{
   background-color: #fad5
+}
+
+.log-drop{
+  overflow: hidden;
+}
+
+.login{
+  position: absolute;;;
+}
+
+.reg-drop{
+  overflow: hidden;
+}
+.register{
+  position: absolute;
 }
