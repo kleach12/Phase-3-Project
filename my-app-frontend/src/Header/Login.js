@@ -2,11 +2,14 @@ import './Login.css'
 
 function Login(){
 return(
-  <div className='log-cont'>
-    <a >Link 2</a>
-    <a >Link 3</a>
-  </div>
-)
+    <div className='log-cont'>
+        <label>Username</label>
+        <input type='text'/>
+        <label>Password</label>
+        <input type='text'/>
+        <button id = 'login'> Login </button>
+    </div>
+  )
 }
 
 export default Login

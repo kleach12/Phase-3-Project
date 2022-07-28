@@ -5,9 +5,11 @@ function Register(){
     <div className='reg-cont'>
       <label>Create Username</label>
       <input type='text'/>
-      <label>Create Username</label>
+      <label>Password</label>
       <input type='text'/>
-      <button>Register</button>
+      <label>Confirm Password</label>
+      <input type='text'/>
+      <button className = 'sign-up'>Sign Up </button>
   </div>
   )
 }
