@@ -6,8 +6,8 @@ function Header(){
 
   return(
     <nav className= "header">
+      <h1 id = 'logo'> JobHunt <FontAwesomeIcon icon={faAddressCard} /></h1>
       <ul>
-        <li><h1> JobHunt <FontAwesomeIcon icon={faAddressCard} /></h1></li>
         <li><button> Login</button></li>
         <li><button> Register</button></li>
       </ul>

@@ -37,14 +37,18 @@ span {
 
 #submit{
   font-family: 'Arvo', serif;
-  font-weight: 600;
+  font-weight: 300;
   font-size: 15px;
   background-color: #FFA400;
-  color: #3C91E6;
+  color: #edede9;
   border: none;
   border-radius: 16px;
   padding: 10px 20px;
   margin: 10px 20px;
+}
+
+#submit:hover{
+  background-color: #fad592;
 }
 
 input{
@@ -54,6 +58,7 @@ input{
   border-radius: 5px;
   border: solid #3C91E6;
 }
+
 select{
   padding: 5px;
   font-family: 'Arvo', serif;
