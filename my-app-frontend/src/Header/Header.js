@@ -11,11 +11,14 @@ const [register, setRegister] = useState(false)
 
 const handleLogin = () => {
   setLogin(!login)
+  setRegister(false)
   console.log(login)}
 
   const handleRegister = () => {
     setRegister(!register)
+    setLogin(false)
     console.log(register)}
+
 
   return(
     <nav className= "header">

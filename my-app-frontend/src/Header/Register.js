@@ -2,9 +2,12 @@ import './Register.css'
 
 function Register(){
   return(
-    <div className='log-cont'>
-    <a >Link 2</a>
-    <a >Link 3</a>
+    <div className='reg-cont'>
+      <label>Create Username</label>
+      <input type='text'/>
+      <label>Create Username</label>
+      <input type='text'/>
+      <button>Register</button>
   </div>
   )
 }
