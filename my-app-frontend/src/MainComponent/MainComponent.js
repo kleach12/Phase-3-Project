@@ -19,7 +19,8 @@ function MainComponent(){
     { field: 'col3', headerName: 'Status', width: 150, editable: true, type: 'singleSelect' , valueOptions: ['Apply','Applied','Contacted', 'Interview', 'Rejected', 'Accepted']},
     { field: 'col4', headerName: 'Applied Date', width: 150, editable: true, type: 'dateTime' },
     { field: 'col5', headerName: 'Response Date', width: 150, editable: true, type: 'dateTime' },
-    { field: 'col6', headerName: 'Notes', width: 500, editable: true, type: 'string' }
+    { field: 'col6', headerName: 'Interview Date', width: 150, editable: true, type: 'dateTime' },
+    { field: 'col7', headerName: 'Notes', width: 500, editable: true, type: 'string' }
     // { field: 'col7', headerName: 'Actions', width: 100, editable: true, type: 'actions'}
     
   ];

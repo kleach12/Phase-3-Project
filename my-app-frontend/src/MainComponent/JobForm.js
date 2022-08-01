@@ -7,6 +7,9 @@ function JobForm({posName}){
   const [formOpen, setFormOpen] = useState(false)
   const [isPosition, setPosition ] = useState("")
   const [isCompany, setCompany] = useState("")
+  const [isStatus, setStatus] = useState("choose")
+  const [isDate, setDate] = useState("")
+
 
   function handlePostion(e){
     setPosition(e.target.value)
@@ -16,6 +19,26 @@ function JobForm({posName}){
   function handleCompany(e){
     setCompany(e.target.value)
     console.log(isCompany)
+  }
+
+  function handleStatus(e){
+    const selectedStatus = e.target.value
+    setStatus(selectedStatus)
+  }
+
+  function handleDate(e){
+    const selectedDate = e.target.value
+    setDate(selectedDate)
+  }
+
+  function handleSubmit(e){
+    e.preventDefault();
+    const formData = {
+      postion: isPosition,
+      company: isCompany,
+      status: isStatus,
+      appliedDate: isDate,
+    }
   }
 
   let handleOpenForm = () => {
@@ -33,8 +56,8 @@ function JobForm({posName}){
         <label>Company </label>
         <input type='text' id = 'position' onChange={handleCompany} value = {isCompany}/>
         <label>Status </label>
-        <select id = 'status'>
-        <option value =''> Choose Status</option>
+        <select id = 'status' onChange={handleStatus} value = {isStatus}>
+          <option value ='choose'> Choose Status</option>
           <option value ='Apply'> Apply</option>
           <option value ='Applied'> Applied</option>
           <option value ='Contacted'> Contacted</option>
@@ -43,7 +66,7 @@ function JobForm({posName}){
           <option value ='Rejected'> Rejected</option>
         </select>
         <label> Date </label>
-        <input type='date' id = 'position'/>
+        <input type='date' id = 'position' onChange={handleDate} value = {isDate}/>
         <input id = 'submit' type ='submit' />
         </div> : null
       }

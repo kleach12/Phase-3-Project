@@ -1,14 +1,19 @@
 import './Register.css'
 
+// function handleRegister(e){
+//   e.preventDefaul
+
+// }
+
 function Register(){
   return(
     <div className='reg-cont'>
       <label>Create Username</label>
       <input type='text'/>
       <label>Password</label>
-      <input type='text'/>
+      <input type='password'/>
       <label>Confirm Password</label>
-      <input type='text'/>
+      <input type='password'/>
       <button className = 'sign-up'>Sign Up </button>
   </div>
   )

@@ -6,7 +6,7 @@ return(
         <label>Username</label>
         <input type='text'/>
         <label>Password</label>
-        <input type='text'/>
+        <input type='password'/>
         <button id = 'login'> Login </button>
     </div>
   )
