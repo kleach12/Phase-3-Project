@@ -1,9 +1,9 @@
-import React, {useState,useEffect} from 'react'
+import React, {useState} from 'react'
 import './Register.css'
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 
-function Register(){
+function Register({setRegisterState}){
   const [isUsername, setUsername] = useState("")
   const [password, setPassword] = useState("")
   const [passwordCorr, setPasswordCorr] = useState("")
@@ -29,8 +29,6 @@ function Register(){
     console.log(passwordCorr)
   }
 
-  
-
   function handleSubmit(e){
     e.preventDefault()
     const formData = {
@@ -49,6 +47,7 @@ function Register(){
     } else{
       alert("Passwords do not match")
     }
+    setRegisterState(false)
     setUsername("")
     setPassword("")
     setPasswordCorr("")

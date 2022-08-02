@@ -50,11 +50,11 @@ const handleLogin = () => {
       <ul className='nav-items' ref = {refOne}>
         <div className='log-drop'>
           <li><Button className = 'btn' onClick={handleLogin}> Login</Button></li>
-          <div className='login'> {login ? <Login/> : null }</div>
+          <div className='login'> {login ? <Login setLoginState = {setLogin} /> : null }</div>
         </div>
         <div className='reg-drop'>
           <li><Button className = 'btn' onClick={handleRegister}> Register</Button></li>
-          <div className='register' > {register ? <Register /> : null }</div>
+          <div className='register' > {register ? <Register setRegisterState = {setRegister}/> : null }</div>
         </div>
       </ul>
     </nav>
