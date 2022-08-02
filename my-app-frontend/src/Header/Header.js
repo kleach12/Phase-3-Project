@@ -4,6 +4,8 @@ import Login from './Login'
 import Register from './Register'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faAddressCard } from '@fortawesome/free-solid-svg-icons'
+import 'bootstrap/dist/css/bootstrap.min.css';
+import Button from 'react-bootstrap/Button';
 
 function Header(){
 const [login, setLogin] = useState(false)
@@ -47,11 +49,11 @@ const handleLogin = () => {
       <h1 id = 'logo'> JobHunt <FontAwesomeIcon icon={faAddressCard} /></h1>
       <ul className='nav-items' ref = {refOne}>
         <div className='log-drop'>
-          <li><button onClick={handleLogin}> Login</button></li>
+          <li><Button className = 'btn' onClick={handleLogin}> Login</Button></li>
           <div className='login'> {login ? <Login/> : null }</div>
         </div>
         <div className='reg-drop'>
-          <li><button onClick={handleRegister}> Register</button></li>
+          <li><Button className = 'btn' onClick={handleRegister}> Register</Button></li>
           <div className='register' > {register ? <Register /> : null }</div>
         </div>
       </ul>

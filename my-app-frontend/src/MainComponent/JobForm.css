@@ -37,15 +37,15 @@ span {
 }
 
 #submit{
-  font-family: 'Arvo', serif;
-  font-weight: 300;
-  font-size: 15px;
-  background-color: #FFA400;
-  color: #edede9;
-  border: none;
-  border-radius: 16px;
-  padding: 10px 20px;
-  margin: 10px 20px;
+  font-family: 'Arvo', serif !important;
+  font-weight: 300 !important;
+  font-size: 15px !important;
+  background-color: #FFA400 !important;
+  color: #edede9 !important;
+  border: none !important;
+  border-radius: 16px !important;
+  padding: 10px 20px !important;
+  margin: 10px 20px !important;
 }
 
 #submit:hover{

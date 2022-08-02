@@ -1,4 +1,5 @@
 .log-cont{
+  align-items: center;
   padding: 5px;
   position: absolute;
   background-color: #f9f9f9;
@@ -14,10 +15,19 @@ label{
 }
 
 
-#login-btn{
-  position: relative;
-  display: block;
+#login {
+  position: relative !important;
+  font-family: 'Arvo', serif !important;
+  font-weight: 300 !important;
+  font-size: 10 px !important;
+  background-color: #FFA400 !important;
+  color: #edede9 !important;
+  border: none !important;
+  border-radius: 16px !important;
+  padding: 10px 20px !important;
+  margin: 10px 20px !important;
 }
+
 button{
   margin-top: 5px;
 }
