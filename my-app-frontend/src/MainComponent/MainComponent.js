@@ -16,7 +16,7 @@ function MainComponent({jobsList}){
   const columns: GridColDef[] = [
     { field: 'position', headerName: 'Position', width: 200 , editable: true },
     { field: 'company', headerName: 'Company Name', width: 200, editable: true  },
-    { field: 'status', headerName: 'Status', width: 150, editable: true, type: 'singleSelect' , valueOptions: ['Apply','Applied','Contacted', 'Interview', 'Rejected', 'Accepted']},
+    { field: 'status', headerName: 'tatus', width: 150, editable: true, type: 'singleSelect' , valueOptions: ['Apply','Applied','Contacted', 'Interview', 'Rejected', 'Accepted']},
     { field: 'applieddate', headerName: 'Applied Date', width: 150, editable: true, type: 'dateTime' },
     { field: 'responsedate', headerName: 'Response Date', width: 150, editable: true, type: 'dateTime' },
     { field: 'notes', headerName: 'Notes', width: 500, editable: true, type: 'string' }
