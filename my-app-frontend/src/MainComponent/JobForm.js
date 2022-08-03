@@ -29,7 +29,7 @@ function JobForm({posName}){
   function handleDate(e){
     const selectedDate = e.target.value
     setDate(selectedDate)
-    console.log(isDate)
+    console.log(typeof(isDate))
   }
 
   function handleSubmit(e){
@@ -39,7 +39,7 @@ function JobForm({posName}){
       position: isPosition,
       company: isCompany,
       status: isStatus,
-      appliedDate: isDate,
+      applieddate: isDate,
       user_id:1
     }
     fetch("http://localhost:9292/job",{
