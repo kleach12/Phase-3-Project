@@ -1,50 +1,52 @@
-import React, {useState} from 'react'
-import './Login.css'
-import 'bootstrap/dist/css/bootstrap.min.css';
+// Due to the project guidelines and learning that rails has an easier way to implement user authentication I would like to in the future add this component
 
-function Login({setLoginState}){
-  const [isUsername, setUsername] = useState("")
-  const [password, setPassword] = useState("")
+// import React, {useState} from 'react'
+// import './Login.css'
+// import 'bootstrap/dist/css/bootstrap.min.css';
 
-  function handleUsername(e){
-    setUsername(e.target.value)
-    console.log(isUsername)
-  }
+// function Login({setLoginState}){
+//   const [isUsername, setUsername] = useState("")
+//   const [password, setPassword] = useState("")
 
-  function handlePassword(e){
-    setPassword(e.target.value)
-    console.log(password)
-  }
+//   function handleUsername(e){
+//     setUsername(e.target.value)
+//     console.log(isUsername)
+//   }
 
-  function handleSubmit(e){
-    e.preventDefault()
-    const formData = {
-      username: isUsername,
-      password: password
-    }
+//   function handlePassword(e){
+//     setPassword(e.target.value)
+//     console.log(password)
+//   }
 
-    fetch("http://localhost:9292/users/signup",{
-        method:"POST",
-        headers:{
-          "Content-Type": "application/json",
-        },
-        body:JSON.stringify(formData)
-      })
+//   function handleSubmit(e){
+//     e.preventDefault()
+//     const formData = {
+//       username: isUsername,
+//       password: password
+//     }
 
-    setLoginState(false)
-    setUsername("")
-    setPassword("")
-  }
+//     fetch("http://localhost:9292/users/signup",{
+//         method:"POST",
+//         headers:{
+//           "Content-Type": "application/json",
+//         },
+//         body:JSON.stringify(formData)
+//       })
 
-return(
-    <form className='log-cont' onSubmit={handleSubmit}>
-        <label>Username</label>
-        <input type='text'onChange={handleUsername} value={isUsername}/>
-        <label>Password</label>
-        <input type='password' onChange={handlePassword} value={password}/>
-        <button id = 'login' > Login </button>
-    </form>
-  )
-}
+//     setLoginState(false)
+//     setUsername("")
+//     setPassword("")
+//   }
 
-export default Login
+// return(
+//     <form className='log-cont' onSubmit={handleSubmit}>
+//         <label>Username</label>
+//         <input type='text'onChange={handleUsername} value={isUsername}/>
+//         <label>Password</label>
+//         <input type='password' onChange={handlePassword} value={password}/>
+//         <button id = 'login' > Login </button>
+//     </form>
+//   )
+// }
+
+// export default Login

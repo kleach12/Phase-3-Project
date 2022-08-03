@@ -29,16 +29,30 @@ function JobForm({posName}){
   function handleDate(e){
     const selectedDate = e.target.value
     setDate(selectedDate)
+    console.log(isDate)
   }
 
   function handleSubmit(e){
+    console.log('clicked')
     e.preventDefault();
     const formData = {
-      postion: isPosition,
+      position: isPosition,
       company: isCompany,
       status: isStatus,
       appliedDate: isDate,
+      user_id:1
     }
+    fetch("http://localhost:9292/job",{
+        method:"POST",
+        headers:{
+          "Content-Type": "application/json",
+        },
+        body:JSON.stringify(formData)
+      })
+      setPosition("")
+      setCompany("")
+      setStatus("choose")
+      setDate("")
   }
 
   let handleOpenForm = () => {
@@ -48,10 +62,10 @@ function JobForm({posName}){
 
 
   return(
-    <div className='form'>
+    <div className='form' >
       <FontAwesomeIcon icon={faSquarePlus}  className = 'add' onClick={handleOpenForm}/>  <span> Add a Job</span>
-      {formOpen ?  <div  className="active_form">
-        <label>Positon</label>
+      {formOpen ?  <form  onSubmit={handleSubmit} className="active_form">
+        <label>Position</label>
         <input type='text' id = 'position' onChange = {handlePostion} value = {isPosition}/>
         <label>Company </label>
         <input type='text' id = 'position' onChange={handleCompany} value = {isCompany}/>
@@ -68,7 +82,7 @@ function JobForm({posName}){
         <label> Date </label>
         <input type='date' id = 'position' onChange={handleDate} value = {isDate}/>
         <input id = 'submit' type ='submit' />
-        </div> : null
+        </form> : null
       }
     </div>
   )

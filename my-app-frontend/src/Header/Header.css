@@ -13,10 +13,10 @@ li{
   text-align: right;
 }
 
-ul{
+/* ul{
   margin: 0;
   padding: 20px;
-}
+} */
 
 #logo{
   font-size: 50px;
@@ -29,7 +29,7 @@ ul{
   display: flex;
 }
 
-.btn {
+/* .btn {
   font-family: 'Arvo', serif !important;
   font-weight: 300 !important;
   font-size: 15px !important;
@@ -39,9 +39,9 @@ ul{
   border-radius: 16px !important;
   padding: 10px 20px !important;
   margin: 0px 20px !important;
-}
+} */
 
-button:hover{
+/* button:hover{
   background-color: #fad5
 }
 
@@ -58,4 +58,4 @@ button:hover{
 }
 .register{
   position: absolute;
-}
+} */

@@ -1,53 +1,54 @@
-import React, {useState,useEffect,useRef} from 'react'
+import React from 'react'
 import './Header.css'
-import Login from './Login'
-import Register from './Register'
+// import Login from './Login'
+// import Register from './Register'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faAddressCard } from '@fortawesome/free-solid-svg-icons'
-import 'bootstrap/dist/css/bootstrap.min.css';
-import Button from 'react-bootstrap/Button';
+// import 'bootstrap/dist/css/bootstrap.min.css';
+
 
 function Header(){
-const [login, setLogin] = useState(false)
-const [register, setRegister] = useState(false)
+// const [login, setLogin] = useState(false)
+// const [register, setRegister] = useState(false)
 
 
-function useOutsideClick(ref){
+// function useOutsideClick(ref){
 
-  useEffect(() => {
+//   useEffect(() => {
 
-    function handleClickOutside(event) {
-      if (ref.current && !ref.current.contains(event.target)) {
-        setRegister(false);
-        setLogin(false);
-      }
-    }
-    document.addEventListener('click', handleClickOutside)
+//     function handleClickOutside(event) {
+//       if (ref.current && !ref.current.contains(event.target)) {
+//         setRegister(false);
+//         setLogin(false);
+//       }
+//     }
+//     document.addEventListener('click', handleClickOutside)
 
-    return () => {
-      document.removeEventListener('click', handleClickOutside)
-    }
+//     return () => {
+//       document.removeEventListener('click', handleClickOutside)
+//     }
 
-  },[ref]);
-}
+//   },[ref]);
+// }
 
-const refOne = useRef(null);
-useOutsideClick(refOne)
+// const refOne = useRef(null);
+// useOutsideClick(refOne)
 
-const handleLogin = () => {
-  setLogin(!login)
-  setRegister(false)
-  console.log(login)}
+// const handleLogin = () => {
+//   setLogin(!login)
+//   setRegister(false)
+//   console.log(login)}
 
-  const handleRegister = () => {
-    setRegister(!register)
-    setLogin(false)
-    console.log(register)}
+//   const handleRegister = () => {
+//     setRegister(!register)
+//     setLogin(false)
+//     console.log(register)}
 
   return(
     <nav className= "header">
       <h1 id = 'logo'> JobHunt <FontAwesomeIcon icon={faAddressCard} /></h1>
-      <ul className='nav-items' ref = {refOne}>
+
+      {/* <ul className='nav-items' ref = {refOne}>
         <div className='log-drop'>
           <li><Button className = 'btn' onClick={handleLogin}> Login</Button></li>
           <div className='login'> {login ? <Login setLoginState = {setLogin} /> : null }</div>
@@ -56,7 +57,7 @@ const handleLogin = () => {
           <li><Button className = 'btn' onClick={handleRegister}> Register</Button></li>
           <div className='register' > {register ? <Register setRegisterState = {setRegister}/> : null }</div>
         </div>
-      </ul>
+      </ul> */}
     </nav>
   )
 }
