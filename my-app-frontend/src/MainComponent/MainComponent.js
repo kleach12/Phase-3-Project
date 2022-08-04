@@ -21,10 +21,21 @@ function MainComponent({jobsList, newJob}){
     { field: 'position', headerName: 'Position', width: 200 , editable: true },
     { field: 'company', headerName: 'Company', width: 200, editable: true  },
     { field: 'status', headerName: 'Status', width: 150, editable: true, type: 'singleSelect' , valueOptions: ['Apply','Applied','Contacted', 'Interview', 'Rejected', 'Accepted']},
-    { field: 'applieddate', headerName: 'Applied Date', width: 150, editable: true, type: 'dateTime' },
-    { field: 'responsedate', headerName: 'Response Date', width: 150, editable: true, type: 'dateTime' },
+    { field: 'applieddate', headerName: 'Applied Date', width: 150, editable: true, type: 'date', 
+    valueFormatter: ({ value }) => {
+      if(value === null || value === 'Invalid Date'){
+        return ""
+      } else{
+        let newDate = new Date(value)
+        const correctDate =  new Date( newDate.getTime() - newDate.getTimezoneOffset() * -60000 );
+        return correctDate.toLocaleDateString()
+      }
+    }
+  
+    },
+    { field: 'responsedate', headerName: 'Response Date', width: 150, editable: true, type: 'date' },
     { field: 'notes', headerName: 'Notes', width: 500, editable: true, type: 'string' }
-    // { field: 'col7', headerName: 'Actions', width: 100, editable: true, type: 'actions'}
+    // { field: 'cactions', headerName: 'Actions', width: 100, editable: true, type: 'actions'}
     
   ];
 
@@ -53,6 +64,8 @@ function MainComponent({jobsList, newJob}){
               columns={columns} 
               checkboxSelection={checkboxSelection} 
               experimentalFeatures={{ newEditingApi: true }}
+              initialState ={{
+                sorting:{ sortModel: [{field: "applieddate" , sort: "asc"}]}}}
               />
 
           </div>
