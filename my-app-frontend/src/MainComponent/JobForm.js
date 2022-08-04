@@ -3,7 +3,7 @@ import './JobForm.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSquarePlus } from '@fortawesome/free-solid-svg-icons';
 
-function JobForm({posName}){
+function JobForm({newJob}){
   const [formOpen, setFormOpen] = useState(false)
   const [isPosition, setPosition ] = useState("")
   const [isCompany, setCompany] = useState("")
@@ -49,6 +49,7 @@ function JobForm({posName}){
         },
         body:JSON.stringify(formData)
       })
+      newJob(formData)
       setPosition("")
       setCompany("")
       setStatus("choose")

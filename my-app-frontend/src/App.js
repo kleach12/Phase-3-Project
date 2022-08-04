@@ -16,11 +16,18 @@ function App() {
     })
   },[])
 
+  let idCounter = jobs.length
+
+  function newJob(job){
+    job.id = idCounter+=1
+    console.log(job.id)
+    setJobs([...jobs, job])
+  }
 
   return (
     <div id = "App">
       <Header/>
-      <MainComponent  jobsList = {jobs}/>
+      <MainComponent  jobsList = {jobs} newJob= {newJob} />
     </div>
   );
 }
