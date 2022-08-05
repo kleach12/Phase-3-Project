@@ -2,10 +2,16 @@ import React, {useState} from 'react';
 import './MainComponent.css'
 import JobForm from './JobForm';
 import Button from '@mui/material/Button';
-import { DataGrid, GridColDef} from '@mui/x-data-grid';
+import { DataGrid, GridColDef , GridActionsCellItem  } from '@mui/x-data-grid';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faTrash } from '@fortawesome/free-solid-svg-icons'
 
 function MainComponent({jobsList, newJob}){
   const [checkboxSelection, setCheckboxSelection] = useState(true);
+
+  function handleDelete(id){
+    console.log(id)
+  }
 
   const jobRows = jobsList.map((row) => ({
     id: row.id,
@@ -34,8 +40,12 @@ function MainComponent({jobsList, newJob}){
   
     },
     { field: 'responsedate', headerName: 'Response Date', width: 150, editable: true, type: 'date' },
-    { field: 'notes', headerName: 'Notes', width: 500, editable: true, type: 'string' }
-    // { field: 'cactions', headerName: 'Actions', width: 100, editable: true, type: 'actions'}
+    { field: 'notes', headerName: 'Notes', width: 500, editable: true, type: 'string' },
+    { field: 'cactions', headerName: 'Actions', width: 100, type: 'actions',
+      getActions: params =>[
+        <GridActionsCellItem icon={<FontAwesomeIcon icon={faTrash}/>} onClick = {handleDelete()} />
+      ]
+    }
     
   ];
 
