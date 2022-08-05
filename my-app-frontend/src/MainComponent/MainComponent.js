@@ -4,10 +4,9 @@ import JobForm from './JobForm';
 import Button from '@mui/material/Button';
 import { DataGrid, GridColDef , GridActionsCellItem  } from '@mui/x-data-grid';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faTrash } from '@fortawesome/free-solid-svg-icons'
+import { faTrash, faPen} from '@fortawesome/free-solid-svg-icons'
 
 function MainComponent({jobsList, newJob, deleteItem}){
-  const [checkboxSelection, setCheckboxSelection] = useState(true);
 
   const handleDelete = (id) => () => {
     deleteItem(id)
@@ -43,6 +42,7 @@ function MainComponent({jobsList, newJob, deleteItem}){
     { field: 'notes', headerName: 'Notes', width: 500, editable: true, type: 'string' },
     { field: 'actions', width: 100, type: 'actions',
       getActions: params =>[
+        <GridActionsCellItem icon={<FontAwesomeIcon icon={faPen}/>} label="Edit"/>,
         <GridActionsCellItem icon={<FontAwesomeIcon icon={faTrash}/>} label = "Delete" onClick={handleDelete(params.id)} />
       ]
     }
@@ -53,7 +53,6 @@ function MainComponent({jobsList, newJob, deleteItem}){
     <div className = "grid">
       <JobForm newJob={newJob}/>
       <div style={{ height: 500, width: '80%'}}>
-        <Button sx={{ mb: 5 }} onClick={() => setCheckboxSelection(!checkboxSelection)}/>
         <div style={{ display: 'flex', height: '100%' }}>
           <div style={{ flexGrow: 1 }}>
             <DataGrid
@@ -72,7 +71,6 @@ function MainComponent({jobsList, newJob, deleteItem}){
               class = 'grid' 
               rows={jobRows} 
               columns={columns} 
-              checkboxSelection={checkboxSelection} 
               experimentalFeatures={{ newEditingApi: true }}
               initialState ={{
                 sorting:{ sortModel: [{field: "applieddate" , sort: "asc"}]}}}

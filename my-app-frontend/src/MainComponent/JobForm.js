@@ -50,6 +50,7 @@ function JobForm({newJob}){
         body:JSON.stringify(formData)
       })
       newJob(formData)
+      setFormOpen(false)
       setPosition("")
       setCompany("")
       setStatus("choose")
