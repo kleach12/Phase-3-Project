@@ -6,11 +6,11 @@ import { DataGrid, GridColDef , GridActionsCellItem  } from '@mui/x-data-grid';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrash } from '@fortawesome/free-solid-svg-icons'
 
-function MainComponent({jobsList, newJob}){
+function MainComponent({jobsList, newJob, deleteItem}){
   const [checkboxSelection, setCheckboxSelection] = useState(true);
 
-  function handleDelete(id){
-    console.log(id)
+  const handleDelete = (id) => () => {
+    deleteItem(id)
   }
 
   const jobRows = jobsList.map((row) => ({
@@ -41,9 +41,9 @@ function MainComponent({jobsList, newJob}){
     },
     { field: 'responsedate', headerName: 'Response Date', width: 150, editable: true, type: 'date' },
     { field: 'notes', headerName: 'Notes', width: 500, editable: true, type: 'string' },
-    { field: 'cactions', headerName: 'Actions', width: 100, type: 'actions',
+    { field: 'actions', width: 100, type: 'actions',
       getActions: params =>[
-        <GridActionsCellItem icon={<FontAwesomeIcon icon={faTrash}/>} onClick = {handleDelete()} />
+        <GridActionsCellItem icon={<FontAwesomeIcon icon={faTrash}/>} label = "Delete" onClick={handleDelete(params.id)} />
       ]
     }
     
