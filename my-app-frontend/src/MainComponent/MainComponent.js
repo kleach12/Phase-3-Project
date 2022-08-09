@@ -1,15 +1,32 @@
 import React, {useState} from 'react';
 import './MainComponent.css'
 import JobForm from './JobForm';
-import Button from '@mui/material/Button';
-import { DataGrid, GridColDef , GridActionsCellItem  } from '@mui/x-data-grid';
+import { DataGrid, GridActionsCellItem, GridRowModes  } from '@mui/x-data-grid';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faTrash, faPen} from '@fortawesome/free-solid-svg-icons'
+import { faTrash, faPen, faSave, faCancel} from '@fortawesome/free-solid-svg-icons'
 
 function MainComponent({jobsList, newJob, deleteItem}){
+  const [rowModesModel, setRowModesModel] = useState({});
+
+  const handleRowEditStart = (params, event) => {
+    event.defaultMuiPrevented = true;
+  };
+
+  const handleRowEditStop = (params, event) => {
+    event.defaultMuiPrevented = true;
+  };
 
   const handleDelete = (id) => () => {
     deleteItem(id)
+  }
+
+  const handleEdit = (id) => () => {
+    console.log(id)
+    setRowModesModel({ ...rowModesModel, [id]: { mode: GridRowModes.Edit } })
+  }
+
+  const handleCancel = (id) => () => {
+    setRowModesModel({ ...rowModesModel, [id]: { mode: GridRowModes.View } })
   }
 
   const jobRows = jobsList.map((row) => ({
@@ -22,12 +39,13 @@ function MainComponent({jobsList, newJob, deleteItem}){
     notes: row.notes
   }))
   
-  const columns: GridColDef[] = [
-    { field: 'position', headerName: 'Position', width: 200 , editable: true },
-    { field: 'company', headerName: 'Company', width: 200, editable: true  },
-    { field: 'status', headerName: 'Status', width: 150, editable: true, type: 'singleSelect' , valueOptions: ['Apply','Applied','Contacted', 'Interview', 'Rejected', 'Accepted']},
-    { field: 'applieddate', headerName: 'Applied Date', width: 150, editable: true, type: 'date', 
+  const columns  = [
+    { field: 'position', headerName: 'Position', width: 250, editable: true},
+    { field: 'company', headerName: 'Company', width: 200, editable: true},
+    { field: 'status', headerName: 'Status', width: 150, type: 'singleSelect' , valueOptions: ['Apply','Applied','Contacted', 'Interview', 'Rejected', 'Accepted'], editable: true},
+    { field: 'applieddate', headerName: 'Applied Date', width: 150, type: 'date',  editable: true,
     valueFormatter: ({ value }) => {
+
       if(value === null || value === 'Invalid Date'){
         return ""
       } else{
@@ -38,13 +56,23 @@ function MainComponent({jobsList, newJob, deleteItem}){
     }
   
     },
-    { field: 'responsedate', headerName: 'Response Date', width: 150, editable: true, type: 'date' },
-    { field: 'notes', headerName: 'Notes', width: 500, editable: true, type: 'string' },
+    { field: 'responsedate', headerName: 'Response Date', width: 150, type: 'date', editable: true }, 
+    { field: 'notes', headerName: 'Notes', width: 500, type: 'string', editable: true},
     { field: 'actions', width: 100, type: 'actions',
-      getActions: params =>[
-        <GridActionsCellItem icon={<FontAwesomeIcon icon={faPen}/>} label="Edit"/>,
-        <GridActionsCellItem icon={<FontAwesomeIcon icon={faTrash}/>} label = "Delete" onClick={handleDelete(params.id)} />
-      ]
+      getActions: ({id}) => {
+        const isInEditMode = rowModesModel[id]?.mode === GridRowModes.Edit;
+
+        if (isInEditMode){
+          return[
+            <GridActionsCellItem icon={<FontAwesomeIcon icon={faSave}/>} label = "Edit" onClick={handleEdit(id)} />,
+            <GridActionsCellItem icon={<FontAwesomeIcon icon={faCancel}/>} label = "Delete" onClick={handleCancel(id)} />
+          ]
+        }
+          return[
+            <GridActionsCellItem icon={<FontAwesomeIcon icon={faPen}/>} label = "Edit" onClick={handleEdit(id)} />,
+            <GridActionsCellItem icon={<FontAwesomeIcon icon={faTrash}/>} label = "Delete" onClick={handleDelete(id)} />
+          ]
+      }
     }
     
   ];
@@ -69,11 +97,14 @@ function MainComponent({jobsList, newJob, deleteItem}){
               fontColor:'#000000'
             }} 
               class = 'grid' 
-              rows={jobRows} 
+              rows={jobRows}
               columns={columns} 
+              editMode = "row"
+              rowModesModel = {rowModesModel}
+              onRowEditStart={handleRowEditStart}
+              onRowEditStop={handleRowEditStop}
               experimentalFeatures={{ newEditingApi: true }}
-              initialState ={{
-                sorting:{ sortModel: [{field: "applieddate" , sort: "asc"}]}}}
+              initialState ={{sorting:{ sortModel: [{field: "applieddate" , sort: "asc"}]}}}
               />
 
           </div>
