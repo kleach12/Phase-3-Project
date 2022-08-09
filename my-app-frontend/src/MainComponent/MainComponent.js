@@ -5,6 +5,8 @@ import { DataGrid, GridActionsCellItem, GridRowModes  } from '@mui/x-data-grid';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrash, faPen, faSave, faCancel} from '@fortawesome/free-solid-svg-icons'
 
+
+
 function MainComponent({jobsList, newJob, deleteItem}){
   const [rowModesModel, setRowModesModel] = useState({});
 
@@ -24,10 +26,18 @@ function MainComponent({jobsList, newJob, deleteItem}){
     console.log(id)
     setRowModesModel({ ...rowModesModel, [id]: { mode: GridRowModes.Edit } })
   }
+  const handleSave = (id) => () => {
+    console.log(id)
+    setRowModesModel({ ...rowModesModel, [id]: { mode: GridRowModes.View } })
+
+    const editedRow = jobsList.find((row) => row.id === id);
+    console.log(editedRow)
+  }
 
   const handleCancel = (id) => () => {
-    setRowModesModel({ ...rowModesModel, [id]: { mode: GridRowModes.View } })
+    setRowModesModel({ ...rowModesModel, [id]: { mode: GridRowModes.View , ignoreModifications: true} })
   }
+
 
   const jobRows = jobsList.map((row) => ({
     id: row.id,
@@ -64,7 +74,7 @@ function MainComponent({jobsList, newJob, deleteItem}){
 
         if (isInEditMode){
           return[
-            <GridActionsCellItem icon={<FontAwesomeIcon icon={faSave}/>} label = "Edit" onClick={handleEdit(id)} />,
+            <GridActionsCellItem icon={<FontAwesomeIcon icon={faSave}/>} label = "Edit" onClick={handleSave(id)} />,
             <GridActionsCellItem icon={<FontAwesomeIcon icon={faCancel}/>} label = "Delete" onClick={handleCancel(id)} />
           ]
         }
