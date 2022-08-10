@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import './MainComponent.css'
 import JobForm from './JobForm';
-import { DataGrid, GridActionsCellItem, GridRowModes  } from '@mui/x-data-grid';
+import { DataGrid, GridActionsCellItem, GridRowModes} from '@mui/x-data-grid';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrash, faPen, faSave, faCancel} from '@fortawesome/free-solid-svg-icons'
 
@@ -10,12 +10,13 @@ import { faTrash, faPen, faSave, faCancel} from '@fortawesome/free-solid-svg-ico
 function MainComponent({jobsList, newJob, deleteItem}){
   const [rowModesModel, setRowModesModel] = useState({});
 
+
   const handleRowEditStart = (params, event) => {
     event.defaultMuiPrevented = true;
   };
 
   const handleRowEditStop = (params, event) => {
-    event.defaultMuiPrevented = true;
+    event.defaultMuiPrevented = false;
   };
 
   const handleDelete = (id) => () => {
@@ -23,23 +24,17 @@ function MainComponent({jobsList, newJob, deleteItem}){
   }
 
   const handleEdit = (id) => () => {
-    console.log(id)
     setRowModesModel({ ...rowModesModel, [id]: { mode: GridRowModes.Edit } })
   }
   const handleSave = (id) => () => {
-    console.log(id)
     setRowModesModel({ ...rowModesModel, [id]: { mode: GridRowModes.View } })
-
-    const editedRow = jobsList.find((row) => row.id === id);
-    console.log(editedRow)
   }
 
   const handleCancel = (id) => () => {
     setRowModesModel({ ...rowModesModel, [id]: { mode: GridRowModes.View , ignoreModifications: true} })
   }
 
-
-  const jobRows = jobsList.map((row) => ({
+  const rows = jobsList.map((row) => ({
     id: row.id,
     position: row.position,
     company: row.company,
@@ -48,6 +43,32 @@ function MainComponent({jobsList, newJob, deleteItem}){
     responsedate: row.responsedate,
     notes: row.notes
   }))
+
+  function processRowUpdate(params){
+    console.log(params)
+    fetch(`http://localhost:9292/edit/${params.id}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        position: params.position,
+        company: params.company,
+        status: params.status,
+        applieddate: params.applieddate,
+        responsedate: params.responsedate,
+        notes:params.notes
+      }),
+    })
+      .then((r) => r.json())
+      .then((data) => console.log(data));
+  }
+
+
+  function handleProcessRowUpdateError(){
+    console.log('Failed to Edit')
+  }
+
   
   const columns  = [
     { field: 'position', headerName: 'Position', width: 250, editable: true},
@@ -87,6 +108,8 @@ function MainComponent({jobsList, newJob, deleteItem}){
     
   ];
 
+
+
   return(
     <div className = "grid">
       <JobForm newJob={newJob}/>
@@ -107,9 +130,11 @@ function MainComponent({jobsList, newJob, deleteItem}){
               fontColor:'#000000'
             }} 
               class = 'grid' 
-              rows={jobRows}
+              rows={rows}
               columns={columns} 
               editMode = "row"
+              processRowUpdate={processRowUpdate}
+              onProcessRowUpdateError={handleProcessRowUpdateError}
               rowModesModel = {rowModesModel}
               onRowEditStart={handleRowEditStart}
               onRowEditStop={handleRowEditStop}
@@ -125,3 +150,11 @@ function MainComponent({jobsList, newJob, deleteItem}){
 }
 
 export default MainComponent
+
+// // 	
+// Callback fired when the cell changes are committed.
+
+// Signature:
+// function(params: GridCellEditCommitParams, event: MuiEvent<MuiBaseEvent>, details: GridCallbackDetails) => void
+// params: With all properties from GridCellEditCommitParams.
+// event: The event that caused this prop to be called.
