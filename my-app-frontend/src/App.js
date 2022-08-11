@@ -38,7 +38,7 @@ function App() {
   return (
     <div id = "App">
       <Header/>
-      <MainComponent  jobsList = {jobs} newJob= {newJob}  deleteItem = {deleteRow}/>
+      <MainComponent  jobsList = {jobs} setJobsList = {setJobs} newJob= {newJob}  deleteItem = {deleteRow}/>
     </div>
   );
 }

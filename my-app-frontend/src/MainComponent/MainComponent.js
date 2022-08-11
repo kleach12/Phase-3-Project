@@ -7,34 +7,37 @@ import { faTrash, faPen, faSave, faCancel} from '@fortawesome/free-solid-svg-ico
 
 
 
-function MainComponent({jobsList, newJob, deleteItem}){
-  const [rowModesModel, setRowModesModel] = useState({});
+function MainComponent({jobsList, setJobsList, newJob, deleteItem}){
+  // const [rowModesModel, setRowModesModel] = useState({});
 
 
-  const handleRowEditStart = (params, event) => {
-    event.defaultMuiPrevented = true;
-  };
+  // const handleRowEditStart = (params, event) => {
+  //   event.defaultMuiPrevented = true;
+  // };
 
-  const handleRowEditStop = (params, event) => {
-    event.defaultMuiPrevented = false;
-  };
+  // const handleRowEditStop = (params, event) => {
+  //   event.defaultMuiPrevented = false;
+  // };
 
   const handleDelete = (id) => () => {
     deleteItem(id)
   }
 
-  const handleEdit = (id) => () => {
-    setRowModesModel({ ...rowModesModel, [id]: { mode: GridRowModes.Edit } })
-  }
-  const handleSave = (id) => () => {
-    setRowModesModel({ ...rowModesModel, [id]: { mode: GridRowModes.View } })
-  }
+  // const handleEdit = (id) => () => {
+  //   setRowModesModel({ ...rowModesModel, [id]: { mode: GridRowModes.Edit } })
+  // }
+  // const handleSave = (id) => () => {
+  //   console.log(id)
+  //   const row = jobsList.find((row) => row.id === id)
+  //   console.log(row)
+  // setRowModesModel({  [id]: { mode: GridRowModes.View } })
+  // }
 
-  const handleCancel = (id) => () => {
-    setRowModesModel({ ...rowModesModel, [id]: { mode: GridRowModes.View , ignoreModifications: true} })
-  }
+  // const handleCancel = (id) => () => {
+  //   setRowModesModel({ ...rowModesModel, [id]: { mode: GridRowModes.View , ignoreModifications: true} })
+  // }
 
-  const rows = jobsList.map((row) => ({
+  const jobRows = jobsList.map((row) => ({
     id: row.id,
     position: row.position,
     company: row.company,
@@ -44,8 +47,7 @@ function MainComponent({jobsList, newJob, deleteItem}){
     notes: row.notes
   }))
 
-  function processRowUpdate(params){
-    console.log(params)
+  const processRowUpdate = (params)  => {
     fetch(`http://localhost:9292/edit/${params.id}`, {
       method: "PATCH",
       headers: {
@@ -62,12 +64,17 @@ function MainComponent({jobsList, newJob, deleteItem}){
     })
       .then((r) => r.json())
       .then((data) => console.log(data));
+      const newParams = {...params, isNew:false}
+      setJobsList(jobsList.map(row => (row.id === newParams.id ? newParams : row)))
+      return newParams
   }
 
 
   function handleProcessRowUpdateError(){
     console.log('Failed to Edit')
   }
+
+
 
   
   const columns  = [
@@ -87,22 +94,36 @@ function MainComponent({jobsList, newJob, deleteItem}){
     }
   
     },
-    { field: 'responsedate', headerName: 'Response Date', width: 150, type: 'date', editable: true }, 
+    { field: 'responsedate', headerName: 'Response Date', width: 150, type: 'date', editable: true,
+      valueFormatter: ({ value }) => {
+
+        if(value === null || value === 'Invalid Date'){
+          return ""
+        } else{
+          let newDate = new Date(value)
+          const correctDate =  new Date( newDate.getTime() - newDate.getTimezoneOffset() * -60000 );
+          return correctDate.toLocaleDateString()
+        }
+      }
+    }, 
     { field: 'notes', headerName: 'Notes', width: 500, type: 'string', editable: true},
     { field: 'actions', width: 100, type: 'actions',
       getActions: ({id}) => {
-        const isInEditMode = rowModesModel[id]?.mode === GridRowModes.Edit;
+        // const isInEditMode = rowModesModel[id]?.mode === GridRowModes.Edit;
 
-        if (isInEditMode){
-          return[
-            <GridActionsCellItem icon={<FontAwesomeIcon icon={faSave}/>} label = "Edit" onClick={handleSave(id)} />,
-            <GridActionsCellItem icon={<FontAwesomeIcon icon={faCancel}/>} label = "Delete" onClick={handleCancel(id)} />
-          ]
-        }
-          return[
-            <GridActionsCellItem icon={<FontAwesomeIcon icon={faPen}/>} label = "Edit" onClick={handleEdit(id)} />,
-            <GridActionsCellItem icon={<FontAwesomeIcon icon={faTrash}/>} label = "Delete" onClick={handleDelete(id)} />
-          ]
+        // if (isInEditMode){
+        //   return[
+        //     // <GridActionsCellItem icon={<FontAwesomeIcon icon={faSave}/>} label = "Edit" onClick={handleSave(id)} />,
+        //     // <GridActionsCellItem icon={<FontAwesomeIcon icon={faCancel}/>} label = "Delete" onClick={handleCancel(id)} />
+        //   ]
+        // }
+        //   return[
+        //     // <GridActionsCellItem icon={<FontAwesomeIcon icon={faPen}/>} label = "Edit" onClick={handleEdit(id)} />,
+        //     <GridActionsCellItem icon={<FontAwesomeIcon icon={faTrash}/>} label = "Delete" onClick={handleDelete(id)} />
+        //   ]
+        return[
+          <GridActionsCellItem icon={<FontAwesomeIcon icon={faTrash}/>} label = "Delete" onClick={handleDelete(id)} />
+        ]
       }
     }
     
@@ -130,14 +151,15 @@ function MainComponent({jobsList, newJob, deleteItem}){
               fontColor:'#000000'
             }} 
               class = 'grid' 
-              rows={rows}
+              rows={jobRows}
               columns={columns} 
-              editMode = "row"
+              // editMode = "row"
+              // processCell
               processRowUpdate={processRowUpdate}
               onProcessRowUpdateError={handleProcessRowUpdateError}
-              rowModesModel = {rowModesModel}
-              onRowEditStart={handleRowEditStart}
-              onRowEditStop={handleRowEditStop}
+              // rowModesModel = {rowModesModel}
+              // onRowEditStart={handleRowEditStart}
+              // onRowEditStop={handleRowEditStop}
               experimentalFeatures={{ newEditingApi: true }}
               initialState ={{sorting:{ sortModel: [{field: "applieddate" , sort: "asc"}]}}}
               />
