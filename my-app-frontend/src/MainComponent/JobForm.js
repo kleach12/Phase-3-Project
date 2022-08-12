@@ -7,38 +7,41 @@ function JobForm({newJob}){
   const [formOpen, setFormOpen] = useState(false)
   const [isPosition, setPosition ] = useState("")
   const [isCompany, setCompany] = useState("")
+  const [isCat, setCat] = useState("choose")
   const [isStatus, setStatus] = useState("choose")
   const [isDate, setDate] = useState("")
 
 
   function handlePostion(e){
     setPosition(e.target.value)
-    console.log(isPosition)
   }
 
   function handleCompany(e){
     setCompany(e.target.value)
-    console.log(isCompany)
   }
 
   function handleStatus(e){
     const selectedStatus = e.target.value
     setStatus(selectedStatus)
   }
+  function handleType(e){
+    const selectedCat = e.target.value
+    setCat(selectedCat)
+    console.log(selectedCat)
+  }
 
   function handleDate(e){
     const selectedDate = e.target.value
     setDate(selectedDate)
-    console.log(typeof(isDate))
   }
 
   function handleSubmit(e){
-    console.log('clicked')
     e.preventDefault();
     const formData = {
       position: isPosition,
       company: isCompany,
       status: isStatus,
+      cat: isCat,
       applieddate: isDate,
       user_id:1
     }
@@ -55,11 +58,11 @@ function JobForm({newJob}){
       setCompany("")
       setStatus("choose")
       setDate("")
+      setCat("choose")
   }
 
   let handleOpenForm = () => {
     setFormOpen(!formOpen)
-    console.log(formOpen)
   }
 
 
@@ -71,6 +74,15 @@ function JobForm({newJob}){
         <input type='text' id = 'position' onChange = {handlePostion} value = {isPosition}/>
         <label>Company </label>
         <input type='text' id = 'position' onChange={handleCompany} value = {isCompany}/>
+        <label> Type </label>
+        <select id = 'status' onChange={handleType} value = {isCat}>
+          <option value ='choose'> Choose Type</option>
+          <option value ='MANGA'> MANGA</option>
+          <option value ='MidSize'> MidSize</option>
+          <option value ='FinTech'> FinTech</option>
+          <option value ='BioTech'> BioTech</option>
+          <option value ='Startup'> Startup</option>
+        </select>
         <label>Status </label>
         <select id = 'status' onChange={handleStatus} value = {isStatus}>
           <option value ='choose'> Choose Status</option>

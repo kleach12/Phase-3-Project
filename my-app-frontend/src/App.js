@@ -12,6 +12,7 @@ function App() {
     .then(res => res.json())
     .then(data => {
       setJobs(data)
+      console.log(data)
     })
   },[])
 
@@ -19,7 +20,6 @@ function App() {
 
   function newJob(job){
     job.id = idCounter+=1
-    console.log(job.id)
     setJobs([...jobs, job])
   }
 
