@@ -1,46 +1,46 @@
-.form{
+.form {
   text-align: left;
 }
-.active_form{
-  font-family: 'Arvo', serif;
+.active_form {
+  font-family: "Arvo", serif;
   font-weight: 600;
   font-size: 20px;
   text-align: center;
   background-color: #edede9;
-  color:  #3C91E6;
+  color: #3c91e6;
   padding-top: 1%;
   margin: 1% 11%;
   border-radius: 16px;
-  border:solid 3px;
+  border: solid 3px;
   border-color: #cacac7;
 }
-label{
+label {
   padding: 20px 20px;
 }
 
 span {
-  font-family: 'Arvo', serif;
+  font-family: "Arvo", serif;
   font-size: 25px;
   font-weight: 600;
-  color: #3C91E6;
+  color: #3c91e6;
   margin-left: 15px;
 }
 .add {
   padding-top: 20px;
   margin-left: 10%;
   font-size: 30px;
-  color: #FFA400;
+  color: #ffa400;
 }
 
-.add:hover{
+.add:hover {
   color: #fad592;
 }
 
-#submit{
-  font-family: 'Arvo', serif !important;
+#submit {
+  font-family: "Arvo", serif !important;
   font-weight: 300 !important;
   font-size: 15px !important;
-  background-color: #FFA400 !important;
+  background-color: #ffa400 !important;
   color: #edede9 !important;
   border: none !important;
   border-radius: 16px !important;
@@ -48,21 +48,21 @@ span {
   margin: 10px 20px !important;
 }
 
-#submit:hover{
+#submit:hover {
   background-color: #fad592;
 }
 
-input{
+input {
   padding: 5px;
-  font-family: 'Arvo', serif;
+  font-family: "Arvo", serif;
   font-size: 15px;
   border-radius: 5px;
   border: solid #cacac7;
 }
 
-select{
+select {
   padding: 5px;
-  font-family: 'Arvo', serif;
+  font-family: "Arvo", serif;
   font-size: 15px;
   border-radius: 5px;
   border: solid #cacac7;
