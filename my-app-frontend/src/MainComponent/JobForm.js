@@ -50,8 +50,12 @@ function JobForm({ newJob }) {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(formData),
-    });
-    newJob(formData);
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        newJob(data);
+      });
     setFormOpen(false);
     setPosition("");
     setCompany("");
