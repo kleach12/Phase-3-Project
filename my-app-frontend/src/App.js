@@ -51,17 +51,6 @@ function App() {
     setID(idNum - 1);
   }
 
-  function newJob(job) {
-    if (idNum === undefined) {
-      setID(1);
-    } else {
-      job.id = idNum + 1;
-    }
-
-    setID(idNum + 1);
-    setJobs([...jobs, job]);
-  }
-
   return (
     <div id="App">
       <Header />
