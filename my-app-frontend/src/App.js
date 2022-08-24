@@ -16,7 +16,7 @@ function App() {
       });
   }, []);
 
-  // console.log(idNum)
+  console.log(idNum);
   // need to figure out how I can make this the last job ID, length does not work because the ID's are not always equal to length. THis could possibly be a backend problem.
   // let idCounter = jobs.length;
 
@@ -28,7 +28,6 @@ function App() {
   //   setID(idNum + 1)
   // }
 
-  console.log(idNum);
   function newJob(job) {
     if (idNum === undefined) {
       setID(1);
@@ -49,6 +48,18 @@ function App() {
 
     const newJobArr = jobs.filter((job) => job.id !== id);
     setJobs(newJobArr);
+    setID(idNum - 1);
+  }
+
+  function newJob(job) {
+    if (idNum === undefined) {
+      setID(1);
+    } else {
+      job.id = idNum + 1;
+    }
+
+    setID(idNum + 1);
+    setJobs([...jobs, job]);
   }
 
   return (
