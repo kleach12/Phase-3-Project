@@ -53,7 +53,6 @@ function JobForm({ newJob }) {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
         newJob(data);
       });
     setFormOpen(false);
