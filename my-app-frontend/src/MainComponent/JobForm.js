@@ -8,6 +8,7 @@ function JobForm({ newJob }) {
   const [isPosition, setPosition] = useState("");
   const [isCompany, setCompany] = useState("");
   const [isCat, setCat] = useState("choose");
+  // const [ isCatChange, setCatChange] = useState(false)
   const [isStatus, setStatus] = useState("choose");
   const [isDate, setDate] = useState("");
 
@@ -26,7 +27,7 @@ function JobForm({ newJob }) {
   function handleType(e) {
     const selectedCat = e.target.value;
     setCat(selectedCat);
-    console.log(selectedCat);
+    // console.log(selectedCat);
   }
 
   function handleDate(e) {
@@ -36,31 +37,35 @@ function JobForm({ newJob }) {
 
   function handleSubmit(e) {
     e.preventDefault();
-    const formData = {
-      position: isPosition,
-      company: isCompany,
-      status: isStatus,
-      cat: isCat,
-      applieddate: isDate,
-      user_id: 1,
-    };
-    fetch("http://localhost:9292/job", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(formData),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        newJob(data);
-      });
-    setFormOpen(false);
-    setPosition("");
-    setCompany("");
-    setStatus("choose");
-    setDate("");
-    setCat("choose");
+    if (isCat === "choose") {
+      alert("Choose a Type!!!");
+    } else {
+      const formData = {
+        position: isPosition,
+        company: isCompany,
+        status: isStatus,
+        cat: isCat,
+        applieddate: isDate,
+        user_id: 1,
+      };
+      fetch("http://localhost:9292/job", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          newJob(data);
+        });
+      setFormOpen(false);
+      setPosition("");
+      setCompany("");
+      setStatus("choose");
+      setDate("");
+      setCat("choose");
+    }
   }
 
   let handleOpenForm = () => {
