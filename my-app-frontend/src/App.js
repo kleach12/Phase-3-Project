@@ -1,45 +1,18 @@
-import { useEffect, useState } from "react";
-import "./App.css";
-import Header from "./Header/Header";
-import MainComponent from "./MainComponent/MainComponent";
+import './App.css'
+import UltComp from './UltComp'
+import UserSign from './SignIn/UserSign'
+import{Routes, Route} from 'react-router-dom'
 
-function App() {
-  const [jobs, setJobs] = useState([]);
 
-  useEffect(() => {
-    fetch("http://localhost:9292/all")
-      .then((res) => res.json())
-      .then((data) => {
-        setJobs(data);
-      });
-  }, []);
-
-  function newJob(job) {
-    setJobs([...jobs, job]);
-  }
-
-  function deleteRow(id) {
-    fetch(`http://localhost:9292/delete/${id}`, {
-      method: "DELETE",
-    })
-      .then((res) => res.json())
-      .then(() => console.log("deleted"));
-
-    const newJobArr = jobs.filter((job) => job.id !== id);
-    setJobs(newJobArr);
-  }
-
-  return (
-    <div id="App">
-      <Header />
-      <MainComponent
-        jobsList={jobs}
-        setJobsList={setJobs}
-        newJob={newJob}
-        deleteItem={deleteRow}
-      />
+function App(){
+  return(
+    <div>
+      <Routes>
+        <Route path ='/' element={<UserSign/>} />
+        <Route path ='/userLoggedIn' element={<UltComp/> } />
+      </Routes>
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
