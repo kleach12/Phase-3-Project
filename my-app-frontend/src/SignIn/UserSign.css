@@ -30,7 +30,16 @@ h1 {
   border-radius: 10px;
 }
 
-label {
+.login label {
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  font-family: "Arvo", serif;
+  font-weight: 600;
+  font-size: 25px;
+}
+
+.sign-up label {
   align-items: center;
   justify-content: center;
   display: flex;

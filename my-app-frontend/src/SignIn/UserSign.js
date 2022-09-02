@@ -2,22 +2,22 @@ import "./UserSign.css";
 import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAddressCard } from "@fortawesome/free-solid-svg-icons";
+import { Navigate } from "react-router-dom";
 
-function SignIn() {
+function SignIn({ setUser, loggedIn, setLoggedIn }) {
   const [isLogin, setLogin] = useState(true);
-  const [userName, setUserName] = useState("");
+  const [isUserName, setUserName] = useState("");
   const [logPassword, setLogPassword] = useState("");
   const [newUsername, setNewUserName] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [newRePassword, setNewRePassword] = useState("");
 
-  function handlelogReg(e) {
+  function handlelogReg() {
     setLogin(!isLogin);
   }
 
   function handleloginNane(e) {
     setUserName(e.target.value);
-    console.log(userName);
   }
 
   function handleSignInPass(e) {
@@ -36,10 +36,35 @@ function SignIn() {
     setNewRePassword(e.target.value);
   }
 
-  // function HandleSignInSubmit(e) {
-  //   e.preventDefault;
-  // }
+  function handleSignInSubmit(e) {
+    e.preventDefault();
+    const formData = {
+      userName: isUserName,
+      password: logPassword,
+    };
+    fetch("http://localhost:9292/signin", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(formData),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data.length);
+        if (data.length === 0) {
+          alert("Password or Username is Incorrect");
+        } else {
+          console.log(data);
+          setUser(data);
+          setLoggedIn(true);
+        }
+      });
+  }
 
+  if (loggedIn) {
+    return <Navigate replace to="/userLoggedIn" />;
+  }
   return (
     <div className="container">
       <div className="center">
@@ -49,13 +74,13 @@ function SignIn() {
         </h1>
         {isLogin ? (
           <div className="login">
-            <form>
+            <form onSubmit={handleSignInSubmit}>
               <label> Login </label>
               <input
                 type="text"
                 id="position"
                 onChange={handleloginNane}
-                value={userName}
+                value={isUserName}
               />
               <label> Password </label>
               <input
@@ -65,7 +90,7 @@ function SignIn() {
                 value={logPassword}
               />
               <div>
-                <button className="btn"> Login </button>
+                <input type="submit" className="btn" />
                 <button className="btn" onClick={handlelogReg}>
                   {" "}
                   Register{" "}

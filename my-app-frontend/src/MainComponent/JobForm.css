@@ -60,7 +60,7 @@ input {
   border: solid #cacac7;
 }
 
-select {
+.active_form select {
   padding: 5px;
   font-family: "Arvo", serif;
   font-size: 15px;
