@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAddressCard } from "@fortawesome/free-solid-svg-icons";
 import { Navigate } from "react-router-dom";
 
-function SignIn({ setUser, loggedIn, setLoggedIn }) {
+function SignIn({ user, setUser, loggedIn, setLoggedIn }) {
   const [isLogin, setLogin] = useState(true);
   const [isUserName, setUserName] = useState("");
   const [logPassword, setLogPassword] = useState("");
@@ -51,13 +51,14 @@ function SignIn({ setUser, loggedIn, setLoggedIn }) {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data.length);
+        // console.log(data.length);
         if (data.length === 0) {
           alert("Password or Username is Incorrect");
         } else {
-          console.log(data);
+          console.log(data[0].id);
           setUser(data);
           setLoggedIn(true);
+          localStorage.setItem("id", `${user[0].id}`);
         }
       });
   }

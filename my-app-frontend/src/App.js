@@ -15,8 +15,8 @@ function App(){
   return(
     <div>
       <Routes>
-        <Route path ='/' element={<UserSign setUser= {setUser} loggedIn = {loggedIn} setLoggedIn = {setLoggedIn}/>} />
-        <Route path ='/userLoggedIn' element={<UltComp user = {user}/> } />
+        <Route path ='/' element={<UserSign user = {user} setUser= {setUser} loggedIn = {loggedIn} setLoggedIn = {setLoggedIn}/>} />
+        <Route path ='/userLoggedIn' element={<UltComp user = {user} setUser= {setUser} setLoggedIn = {setLoggedIn} loggedIn ={loggedIn}/> } />
       </Routes>
     </div>
   )

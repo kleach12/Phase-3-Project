@@ -12,6 +12,8 @@ function JobForm({ newJob }) {
   const [isStatus, setStatus] = useState("choose");
   const [isDate, setDate] = useState("");
 
+  const userId = localStorage.getItem('id')
+
   function handlePostion(e) {
     setPosition(e.target.value);
   }
@@ -46,7 +48,7 @@ function JobForm({ newJob }) {
         status: isStatus,
         cat: isCat,
         applieddate: isDate,
-        user_id: 1,
+        user_id: userId,
       };
       fetch("http://localhost:9292/job", {
         method: "POST",
