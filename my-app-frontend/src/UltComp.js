@@ -2,22 +2,18 @@ import { useEffect, useState } from "react";
 import "./UltComp.css";
 import Header from "./Header/Header";
 import MainComponent from "./MainComponent/MainComponent";
+import { Navigate } from "react-router-dom";
 
-function UltComp({user,setUser, setLoggedIn, loggedIn}) {
+function UltComp({ user, setUser, setLoggedIn, loggedIn }) {
   const [jobs, setJobs] = useState([]);
-  // let userId = user[0].id
-  // localStorage.setItem("id", `${userId}`);
-  const storedId = localStorage.getItem('id')
-  console.log(storedId)
 
   useEffect(() => {
-
-    fetch(`http://localhost:9292/user/jobs/${storedId}`)
+    fetch(`http://localhost:9292/user/jobs/${localStorage.getItem("id")}`)
       .then((res) => res.json())
       .then((data) => {
         setJobs(data);
       });
-  },[storedId]);
+  }, []);
 
   function newJob(job) {
     setJobs([...jobs, job]);
@@ -34,12 +30,15 @@ function UltComp({user,setUser, setLoggedIn, loggedIn}) {
     setJobs(newJobArr);
   }
 
+  if (loggedIn === false) {
+    return <Navigate replace to="/" />;
+  }
+
   return (
     <div id="App">
-      
-      <Header />
+      <Header loggedIn={loggedIn} setLoggedIn={setLoggedIn} />
       <MainComponent
-        user = {user}
+        user={user}
         jobsList={jobs}
         setJobsList={setJobs}
         newJob={newJob}

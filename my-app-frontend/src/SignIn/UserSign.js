@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAddressCard } from "@fortawesome/free-solid-svg-icons";
 import { Navigate } from "react-router-dom";
 
-function SignIn({ user, setUser, loggedIn, setLoggedIn }) {
+function SignIn({ setUser, loggedIn, setLoggedIn }) {
   const [isLogin, setLogin] = useState(true);
   const [isUserName, setUserName] = useState("");
   const [logPassword, setLogPassword] = useState("");
@@ -55,12 +55,42 @@ function SignIn({ user, setUser, loggedIn, setLoggedIn }) {
         if (data.length === 0) {
           alert("Password or Username is Incorrect");
         } else {
-          console.log(data[0].id);
           setUser(data);
           setLoggedIn(true);
-          localStorage.setItem("id", `${user[0].id}`);
+          localStorage.setItem("id", `${data[0].id}`);
         }
       });
+  }
+
+  function handleCreateUserSubmit(e) {
+    e.preventDefault();
+    if (newPassword !== newRePassword) {
+      alert("Your Passwords do not match");
+    } else {
+      const formData = {
+        userName: newUsername,
+        password: newPassword,
+      };
+      fetch("http://localhost:9292/createUser", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          console.log(data)
+          if (!data) {
+            alert("The username you chose already exist");
+          } else {
+            console.log(data)
+            setUser(data);
+            setLoggedIn(true);
+            localStorage.setItem("id", `${data.id}`);
+          }
+        });
+    }
   }
 
   if (loggedIn) {
@@ -85,7 +115,7 @@ function SignIn({ user, setUser, loggedIn, setLoggedIn }) {
               />
               <label> Password </label>
               <input
-                type="text"
+                type="password"
                 id="position"
                 onChange={handleSignInPass}
                 value={logPassword}
@@ -101,30 +131,27 @@ function SignIn({ user, setUser, loggedIn, setLoggedIn }) {
           </div>
         ) : (
           <div className="sign-up">
-            <form>
+            <form onSubmit={handleCreateUserSubmit}>
               <label> User Name </label>
               <input
                 type="text"
-                id="position"
                 onChange={handleCreateUsername}
                 value={newUsername}
               />
               <label> Password </label>
               <input
-                type="text"
-                id="position"
+                type="password"
                 onChange={handleNewPassword}
                 value={newPassword}
               />
               <label> Re-Type Password </label>
               <input
-                type="text"
-                id="position"
+                type="password"
                 onChange={handleRePassword}
                 value={newRePassword}
               />
               <div className="btn-div">
-                <button className="btn"> Create User </button>
+                <input id="login-submit" type="submit" className="btn" />
                 <button className="btn" onClick={handlelogReg}>
                   {" "}
                   Sign in{" "}
