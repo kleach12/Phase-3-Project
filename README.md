@@ -7,7 +7,7 @@ that particular job.
 
 
 <h2>Visuals</h2>
-<img src ="https://media.giphy.com/media/0vC5L79qRcRqu5ta0Q/giphy.giff"/>
+<img src ="https://media.giphy.com/media/0vC5L79qRcRqu5ta0Q/giphy.gif"/>
 <img src ="https://media.giphy.com/media/BI0ofn8pIpVPNs1nEA/giphy.gif"/>
 
 
