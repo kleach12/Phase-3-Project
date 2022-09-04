@@ -3,15 +3,12 @@
 <h2>Description</h2>
 A fullstack web application built on a React frontend and Ruby backend. This data grid allows users to record the jobs they are
 applying to. The user is able to create/delete/update/sort any of their jobs and stay up to date on where they are at in the process for
-that particular job.
- 
-This app was created using React frontend and Ruby backend along with HTML and CSS
+that particular job. This app was created using React frontend and Ruby backend along with HTML and CSS.
 
 
 <h2>Visuals</h2>
-<!-- <img src ="https://user-images.githubusercontent.com/95396231/167528031-3be47724-310f-4b61-91f1-5f47bb0e8bb2.gif"/>
-<img src ="https://user-images.githubusercontent.com/95396231/167531730-c7ad5583-a862-4ae9-98f2-3a143da6f30e.gif"/>
-<img src ="https://user-images.githubusercontent.com/95396231/167531027-7858ab5d-dd37-4b4e-b657-b5c6ebeb0dd8.gif"/> -->
+<img src ="https://media.giphy.com/media/0vC5L79qRcRqu5ta0Q/giphy.giff"/>
+<img src ="https://media.giphy.com/media/BI0ofn8pIpVPNs1nEA/giphy.gif"/>
 
 
 
